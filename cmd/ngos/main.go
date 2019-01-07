@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bufio"
+	"encoding/csv"
 	"flag"
 	"fmt"
+	"io"
 	"os"
 )
 
@@ -32,6 +35,62 @@ func main() {
 		fmt.Fprintln(os.Stderr, "	-new", "new CSV file")
 		fmt.Fprintln(os.Stderr, "	-o | --o", "output CSV file")
 
+	}
+
+	// read ole csv file
+	oldFile, err := os.Open(oldCSVFile)
+
+	if err != nil {
+		flag.Usage()
+		os.Exit(1)
+	}
+
+	readerOldCSVFile := csv.NewReader(bufio.NewReader(oldFile))
+
+	// read new csv file
+	newFile, err := os.Open(newCSVFile)
+
+	if err != nil {
+		flag.Usage()
+		os.Exit(1)
+	}
+
+	readerNewCSVFile := csv.NewReader(bufio.NewReader(newFile))
+
+	var (
+		linesOld []string
+		linesNew []string
+	)
+
+	for {
+		line, err := readerOldCSVFile.Read()
+		if err == io.EOF {
+			break
+		} else if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		linesOld = append(linesOld, line...)
+
+	}
+
+	for {
+		line, err := readerNewCSVFile.Read()
+		if err == io.EOF {
+			break
+		} else if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		linesNew = append(linesNew, line...)
+
+	}
+
+	if len(linesNew) <= len(linesOld) {
+		fmt.Println("new csv file should larger than old csv file")
+		os.Exit(1)
 	}
 
 }
