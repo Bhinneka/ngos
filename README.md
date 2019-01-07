@@ -1,5 +1,7 @@
 # ngos
 
+#### (EXPERIMENTAL, there are still many bugs)
+
 Tool for comparing two `CSV` files, and create the output of that difference
 
 TODO:
