@@ -2,7 +2,7 @@
 
 #### (EXPERIMENTAL, there are still many bugs)
 
-Tool for comparing two `CSV` files, and create the output of that difference
+Tool for comparing two `CSV` files, and create the output of the difference
 
 TODO:
 - Implement Concurrency
