@@ -93,4 +93,54 @@ func main() {
 		os.Exit(1)
 	}
 
+	linesOut := compare(linesNew, linesOld)
+
+	fmt.Println(linesOut)
+
+	err = write(linesOut, ouputCSVFile)
+
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+}
+
+func compare(a, b []string) [][]string {
+	for i := len(a) - 1; i >= 0; i-- {
+		for _, vD := range b {
+			if a[i] == vD {
+				a = append(a[:i], a[i+1:]...)
+				break
+			}
+		}
+	}
+
+	var result [][]string
+
+	for _, v := range a {
+		result = append(result, []string{v})
+	}
+
+	return result
+}
+
+func write(datas [][]string, output string) error {
+	file, err := os.Create(output)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	writer := csv.NewWriter(file)
+	defer writer.Flush()
+
+	for _, value := range datas {
+		err = writer.Write(value)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
