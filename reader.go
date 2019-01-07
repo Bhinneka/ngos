@@ -7,7 +7,7 @@ import (
 
 // Reader interface
 type Reader interface {
-	Read(reader *csv.Reader) ([]string, error)
+	Read(reader *csv.Reader) ([][]string, error)
 }
 
 // CSVReader struct
@@ -15,8 +15,8 @@ type CSVReader struct {
 }
 
 // Read function
-func (CSVReader) Read(reader *csv.Reader) ([]string, error) {
-	var lines []string
+func (CSVReader) Read(reader *csv.Reader) ([][]string, error) {
+	var lines [][]string
 	for {
 		line, err := reader.Read()
 		if err == io.EOF {
@@ -25,9 +25,11 @@ func (CSVReader) Read(reader *csv.Reader) ([]string, error) {
 			return nil, err
 		}
 
-		lines = append(lines, line...)
+		lines = append(lines, line)
 
 	}
+
+	//fmt.Println(lines[0])
 
 	return lines, nil
 }
