@@ -65,8 +65,6 @@ func (n *Ngos) Run() {
 		os.Exit(1)
 	}
 
-	//fmt.Println(linesNew[0])
-
 	if len(linesNew) <= len(linesOld) {
 		fmt.Println("new csv file should larger than old csv file")
 		os.Exit(1)
