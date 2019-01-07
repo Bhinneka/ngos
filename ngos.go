@@ -53,6 +53,11 @@ func (n *Ngos) Run() {
 		os.Exit(1)
 	}
 
+	lineOldMapper := make(map[string]bool)
+	for _, record := range linesOld {
+		lineOldMapper[record] = true
+	}
+
 	linesNew, err := n.Reader.Read(readerNewCSVFile)
 	if err != nil {
 		fmt.Println(err)
@@ -64,7 +69,7 @@ func (n *Ngos) Run() {
 		os.Exit(1)
 	}
 
-	linesOut := n.compare(linesNew, linesOld)
+	linesOut := n.compare(linesNew, lineOldMapper)
 
 	fmt.Println(linesOut)
 
@@ -76,13 +81,10 @@ func (n *Ngos) Run() {
 	}
 }
 
-func (n *Ngos) compare(a, b []string) [][]string {
+func (n *Ngos) compare(a []string, b map[string]bool) [][]string {
 	for i := len(a) - 1; i >= 0; i-- {
-		for _, vD := range b {
-			if a[i] == vD {
-				a = append(a[:i], a[i+1:]...)
-				break
-			}
+		if b[a[i]] {
+			a = append(a[:i], a[i+1:]...)
 		}
 	}
 
