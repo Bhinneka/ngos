@@ -12,5 +12,5 @@ TODO:
 ### Usage
 
 ```shell
-$ ngos ngos -old a.csv -new b.csv -o output.csv
+$ ngos -old a.csv -new b.csv -o output.csv
 ```
