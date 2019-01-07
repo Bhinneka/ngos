@@ -7,6 +7,11 @@ import (
 	"os"
 )
 
+const (
+	// Version,  the version of Ngos
+	Version = "0.0.0"
+)
+
 // Arguments struct will hold flag and arguments from stdin
 type Arguments struct {
 	OldCSVFile    string
