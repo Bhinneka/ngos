@@ -7,7 +7,7 @@ import (
 
 // Writer interface
 type Writer interface {
-	Write(datas [][]string, output string) error
+	Write([][]string, string) error
 }
 
 // CSVWriter struct
