@@ -1,7 +1,14 @@
 # ngos
 
-Tool for comparing two `CSV` files, and create output from that difference
+Tool for comparing two `CSV` files, and create the output of that difference
 
 TODO:
-- Concurrent Handling
+- Implement Concurrency
 - Modular Code
+- Handling `CSV` file with multiple column
+
+### Usage
+
+```shell
+$ ngos ngos -old a.csv -new b.csv -o output.csv
+```
