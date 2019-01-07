@@ -15,7 +15,9 @@ TODO:
 
 ```shell
 $ go get github.com/Bhinneka/ngos
+
 $ go install github.com/Bhinneka/ngos/cmd/ngos
+
 $ ngos -v
 ```
 
