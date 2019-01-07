@@ -40,10 +40,6 @@ func ParseArgs() (*Arguments, error) {
 	flag.BoolVar(&showVersion, "version", false, "show version")
 	flag.BoolVar(&showVersion, "v", false, "show version")
 
-	fmt.Println(oldCSVFile)
-	fmt.Println(newCSVFile)
-	fmt.Println(ouputCSVFile)
-
 	flag.Usage = func() {
 
 		fmt.Fprintln(os.Stderr, "	-old | --old", "old CSV file")
