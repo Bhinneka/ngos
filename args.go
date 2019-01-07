@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	// Version,  the version of Ngos
+	// Version ,  the version of Ngos
 	Version = "0.0.0"
 )
 
