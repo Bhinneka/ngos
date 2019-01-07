@@ -1,9 +1,6 @@
 package ngos
 
 import (
-	"bufio"
-	"encoding/csv"
-	"flag"
 	"fmt"
 	"os"
 	"strings"
@@ -29,37 +26,21 @@ func New(args *Arguments) *Ngos {
 
 // Run function, will Run Ngos
 func (n *Ngos) Run() {
-	oldFile, err := os.Open(n.Args.OldCSVFile)
-
-	if err != nil {
-		flag.Usage()
-		os.Exit(1)
-	}
-
-	readerOldCSVFile := csv.NewReader(bufio.NewReader(oldFile))
-
-	// read new csv file
-	newFile, err := os.Open(n.Args.NewCSVFile)
-
+	// read old csv file
+	linesOld, err := n.Reader.Read(n.Args.OldCSVFile)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	readerNewCSVFile := csv.NewReader(bufio.NewReader(newFile))
-
-	linesOld, err := n.Reader.Read(readerOldCSVFile)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
+	// create map from old csv file
 	lineOldMapper := make(map[string]bool)
 	for _, record := range linesOld {
 		lineOldMapper[strings.Join(record, ",")] = true
 	}
 
-	linesNew, err := n.Reader.Read(readerNewCSVFile)
+	// read new csv file
+	linesNew, err := n.Reader.Read(n.Args.NewCSVFile)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -90,6 +71,7 @@ func (n *Ngos) compare(a [][]string, b map[string]bool) [][]string {
 	var result [][]string
 
 	for _, v := range a {
+		fmt.Println(v)
 		result = append(result, v)
 	}
 

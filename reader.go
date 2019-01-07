@@ -1,13 +1,15 @@
 package ngos
 
 import (
+	"bufio"
 	"encoding/csv"
 	"io"
+	"os"
 )
 
 // Reader interface
 type Reader interface {
-	Read(reader *csv.Reader) ([][]string, error)
+	Read(string) ([][]string, error)
 }
 
 // CSVReader struct
@@ -15,8 +17,16 @@ type CSVReader struct {
 }
 
 // Read function
-func (CSVReader) Read(reader *csv.Reader) ([][]string, error) {
+func (CSVReader) Read(path string) ([][]string, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+
+	reader := csv.NewReader(bufio.NewReader(file))
+
 	var lines [][]string
+
 	for {
 		line, err := reader.Read()
 		if err == io.EOF {
