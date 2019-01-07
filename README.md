@@ -11,6 +11,14 @@ TODO:
 
 ### Usage
 
+- Build binary from source
+
+```shell
+$ go get github.com/Bhinneka/ngos
+$ go install github.com/Bhinneka/ngos/cmd/ngos
+$ ngos -v
+```
+
 ```shell
 $ ngos -old a.csv -new b.csv -o output.csv
 ```
