@@ -39,7 +39,5 @@ func (CSVReader) Read(path string) ([][]string, error) {
 
 	}
 
-	//fmt.Println(lines[0])
-
 	return lines, nil
 }
