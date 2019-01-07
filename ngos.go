@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 )
 
 // Ngos struct
@@ -55,7 +56,7 @@ func (n *Ngos) Run() {
 
 	lineOldMapper := make(map[string]bool)
 	for _, record := range linesOld {
-		lineOldMapper[record] = true
+		lineOldMapper[strings.Join(record, ",")] = true
 	}
 
 	linesNew, err := n.Reader.Read(readerNewCSVFile)
@@ -64,14 +65,14 @@ func (n *Ngos) Run() {
 		os.Exit(1)
 	}
 
+	//fmt.Println(linesNew[0])
+
 	if len(linesNew) <= len(linesOld) {
 		fmt.Println("new csv file should larger than old csv file")
 		os.Exit(1)
 	}
 
 	linesOut := n.compare(linesNew, lineOldMapper)
-
-	fmt.Println(linesOut)
 
 	err = n.Writer.Write(linesOut, n.Args.OutputCSVFile)
 
@@ -81,9 +82,9 @@ func (n *Ngos) Run() {
 	}
 }
 
-func (n *Ngos) compare(a []string, b map[string]bool) [][]string {
+func (n *Ngos) compare(a [][]string, b map[string]bool) [][]string {
 	for i := len(a) - 1; i >= 0; i-- {
-		if b[a[i]] {
+		if b[strings.Join(a[i], ",")] {
 			a = append(a[:i], a[i+1:]...)
 		}
 	}
@@ -91,7 +92,7 @@ func (n *Ngos) compare(a []string, b map[string]bool) [][]string {
 	var result [][]string
 
 	for _, v := range a {
-		result = append(result, []string{v})
+		result = append(result, v)
 	}
 
 	return result
