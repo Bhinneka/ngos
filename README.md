@@ -1,5 +1,7 @@
 # ngos
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/Bhinneka/ngos)](https://goreportcard.com/report/github.com/Bhinneka/ngos)
+
 #### (EXPERIMENTAL, there are still many bugs)
 
 Tool for comparing two `CSV` files, and create the output of the difference. Ngos can compare millions of lines of csv file just in second. 
