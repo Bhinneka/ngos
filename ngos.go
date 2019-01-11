@@ -33,7 +33,7 @@ func (n *Ngos) Run() {
 	// read old csv file
 	linesOld, err := n.Reader.Read(n.Args.OldCSVFile)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("\033[31m%s\033[0m%s", err.Error(), "\n")
 		os.Exit(1)
 	}
 
@@ -46,12 +46,12 @@ func (n *Ngos) Run() {
 	// read new csv file
 	linesNew, err := n.Reader.Read(n.Args.NewCSVFile)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("\033[31m%s\033[0m%s", err.Error(), "\n")
 		os.Exit(1)
 	}
 
 	if len(linesNew) <= len(linesOld) {
-		fmt.Println("new csv file should larger than old csv file")
+		fmt.Printf("\033[31m%s\033[0m%s", "new csv file should larger than old csv file", "\n")
 		os.Exit(1)
 	}
 
@@ -60,7 +60,7 @@ func (n *Ngos) Run() {
 	err = n.Writer.Write(linesOut, n.Args.OutputCSVFile)
 
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("\033[31m%s\033[0m%s", err.Error(), "\n")
 		os.Exit(1)
 	}
 
