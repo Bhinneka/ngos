@@ -43,8 +43,9 @@ func ParseArgs() (*Arguments, error) {
 	flag.Usage = func() {
 
 		fmt.Fprintln(os.Stderr, "	-old | --old", "old CSV file")
-		fmt.Fprintln(os.Stderr, "	-new", "new CSV file")
+		fmt.Fprintln(os.Stderr, "	-new | --new", "new CSV file")
 		fmt.Fprintln(os.Stderr, "	-o | --o", "output CSV file")
+		fmt.Fprintln(os.Stderr, "	-v | --version", "show ngos version")
 
 	}
 
