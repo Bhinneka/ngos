@@ -26,7 +26,7 @@ func (CSVReader) Read(path string) ([][]string, error) {
 	reader := csv.NewReader(bufio.NewReader(file))
 
 	// If LazyQuotes is true, a quote may appear in an unquoted field and a
-  // non-doubled quote may appear in a quoted field.
+	// non-doubled quote may appear in a quoted field.
 	// see: https://golang.org/pkg/encoding/csv/#Reader
 	reader.LazyQuotes = true
 
