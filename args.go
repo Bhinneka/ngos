@@ -51,11 +51,11 @@ func ParseArgs() (*Arguments, error) {
 
 	flag.Parse()
 
-	if len(oldCSVFile) < 0 {
+	if len(oldCSVFile) <= 0 {
 		return &Arguments{Help: flag.Usage}, errors.New("	(-old) arg required")
 	}
 
-	if len(newCSVFile) < 0 {
+	if len(newCSVFile) <= 0 {
 		return &Arguments{Help: flag.Usage}, errors.New("	(-new) arg required")
 	}
 
