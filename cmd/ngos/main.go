@@ -18,7 +18,7 @@ func main() {
 	}
 
 	if args.ShowVersion {
-		fmt.Printf("%s version %s (runtime: %s)\n", os.Args[0], ngos.Version, runtime.Version())
+		fmt.Printf("\033[35m%s version %s (runtime: %s)\033[0m%s", os.Args[0], ngos.Version, runtime.Version(), "\n")
 		os.Exit(0)
 	}
 
