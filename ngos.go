@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 // Ngos struct
@@ -26,6 +27,9 @@ func New(args *Arguments) *Ngos {
 
 // Run function, will Run Ngos
 func (n *Ngos) Run() {
+
+	defer elapsed("ngos")()
+
 	// read old csv file
 	linesOld, err := n.Reader.Read(n.Args.OldCSVFile)
 	if err != nil {
@@ -59,6 +63,7 @@ func (n *Ngos) Run() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+
 }
 
 func (n *Ngos) compare(a [][]string, b map[string]bool) [][]string {
@@ -71,9 +76,16 @@ func (n *Ngos) compare(a [][]string, b map[string]bool) [][]string {
 	var result [][]string
 
 	for _, v := range a {
-		fmt.Println(v)
 		result = append(result, v)
 	}
 
 	return result
+}
+
+func elapsed(w string) func() {
+	start := time.Now()
+	return func() {
+		fmt.Printf("\033[35m%s\033[0m%s", "finish...", "\n")
+		fmt.Printf("\033[35m%s %s %f %s\033[0m%s", w, "took", time.Since(start).Seconds(), "seconds", "\n")
+	}
 }
