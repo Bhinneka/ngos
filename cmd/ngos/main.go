@@ -12,7 +12,7 @@ func main() {
 	args, err := ngos.ParseArgs()
 
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("\033[31m%s\033[0m%s", err.Error(), "\n")
 		args.Help()
 		os.Exit(0)
 	}
