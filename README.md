@@ -8,8 +8,6 @@ Tool for comparing two `CSV` files, and create the output of the difference. Ngo
 
 TODO:
 - Implement Concurrency
-- Modular Code
-- Handling `CSV` file with multiple column
 
 ### Usage
 
